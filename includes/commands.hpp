@@ -1,3 +1,6 @@
+#ifndef COP4600HW2_COMMANDS
+#define COP4600HW2_COMMANDS
+
 #include <string>
 enum class Command
 {
@@ -18,3 +21,5 @@ enum class Command
 Command findCommand(std::string s);
 
 Command getCommandFromPrompt(std::string &string_result);
+
+#endif

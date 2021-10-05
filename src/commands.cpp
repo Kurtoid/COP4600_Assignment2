@@ -23,8 +23,11 @@ Command getCommandFromPrompt(std::string &args)
 
     // find first space
     std::size_t arg_pos = cmd_str.find(" ");
-    // this is a copy
-    args = cmd_str.substr(arg_pos + 1, cmd_str.length());
+    if (arg_pos != std::string::npos)
+    {
+        // this is a copy
+        args = cmd_str.substr(arg_pos + 1, cmd_str.length());
+    }
 
     std::string cmd_str_lower = toLower(cmd_str.substr(0, arg_pos));
     return findCommand(cmd_str_lower);
