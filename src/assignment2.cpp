@@ -31,7 +31,10 @@ int main()
         HistoryEntry e;
         e.args = args;
         e.command = command;
-        current_state.history.push_back(e);
+        if (command != Command::NONE)
+        {
+            current_state.history.push_back(e);
+        }
         switch (command)
         {
         case Command::MOVETODIR:
@@ -43,7 +46,14 @@ int main()
             std::cout << current_state.current_path << std::endl;
             break;
         case Command::HISTORY:
-            printHistory(current_state.history);
+            if (args == "-c")
+            {
+                current_state.history.clear();
+            }
+            else
+            {
+                printHistory(current_state.history);
+            }
             break;
         case Command::BYEBYE:
             break;
