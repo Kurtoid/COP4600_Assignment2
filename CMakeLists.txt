@@ -1,10 +1,15 @@
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 2.8.12)
 project (assignment2)
 
-# Create a library called "Hello" which includes the source file "hello.cxx".
-# The extension is already found. Any number of sources could be listed here.
-add_library (commands src/commands.cpp)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
 include_directories(includes)
+
+add_library (commands src/commands.cpp)
+add_library (history src/history.cpp)
+add_library (foldertools src/foldertools.cpp)
 
 add_executable(assignment2 src/assignment2.cpp)
 target_link_libraries(assignment2 commands)
+target_link_libraries(assignment2 history)
+target_link_libraries(assignment2 foldertools)

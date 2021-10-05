@@ -18,7 +18,6 @@ std::string HistoryEntry::toString()
             args_escaped += c;
         }
     }
-    std::cout << "command: " << std::to_string((int)this->command) << std::endl;
     return std::to_string((int)this->command) + " " + args_escaped;
 }
 

@@ -3,6 +3,7 @@
 #include <vector>
 #include "commands.hpp"
 #include "history.hpp"
+#include "foldertools.hpp"
 
 struct systemState
 {
@@ -31,16 +32,17 @@ int main()
         e.args = args;
         e.command = command;
         current_state.history.push_back(e);
-        std::cout << (int)command << std::endl;
         switch (command)
         {
         case Command::MOVETODIR:
-
+        {
+            bool success = moveToFolder(args, current_state.current_path);
+            break;
+        }
+        case Command::WHEREAMI:
+            std::cout << current_state.current_path << std::endl;
             break;
         case Command::BYEBYE:
-
-            // TODO: dump history
-
             break;
         default:
             std::cout << "Command unknown" << std::endl;
