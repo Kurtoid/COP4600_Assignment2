@@ -22,4 +22,6 @@ Command findCommand(std::string s);
 
 Command getCommandFromPrompt(std::string &string_result);
 
+std::string commandToString(Command command);
+
 #endif

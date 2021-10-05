@@ -42,6 +42,9 @@ int main()
         case Command::WHEREAMI:
             std::cout << current_state.current_path << std::endl;
             break;
+        case Command::HISTORY:
+            printHistory(current_state.history);
+            break;
         case Command::BYEBYE:
             break;
         default:

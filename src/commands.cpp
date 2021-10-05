@@ -79,3 +79,32 @@ Command findCommand(std::string s)
         return Command::NONE;
     }
 }
+std::string commandToString(Command command)
+{
+    switch (command)
+    {
+    case Command::MOVETODIR:
+        return "movetodir";
+    case Command::WHEREAMI:
+        return "whereami";
+    case Command::HISTORY:
+        return "history";
+    case Command::BYEBYE:
+        return "byebye";
+    case Command::REPLAY:
+        return "replay";
+    case Command::START:
+        return "start";
+    case Command::BACKGROUND:
+        return "background";
+    case Command::DALEK:
+        return "dalek";
+    case Command::REPEAT:
+        return "repeat";
+    case Command::DALEKALL:
+        return "dalekall";
+    case Command::NONE:
+    default:
+        return "NOSUCHCOMMAND";
+    }
+}
