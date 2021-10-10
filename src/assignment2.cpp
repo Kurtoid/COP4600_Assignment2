@@ -11,6 +11,7 @@ struct systemState
     std::vector<HistoryEntry> history;
 };
 
+void executeCommand(HistoryEntry e, systemState &current_state);
 int main()
 {
     systemState current_state;
@@ -31,39 +32,49 @@ int main()
         HistoryEntry e;
         e.args = args;
         e.command = command;
-        if (command != Command::NONE)
+        if (command != Command::NONE && command != Command::REPLAY)
         {
             current_state.history.push_back(e);
         }
-        switch (command)
-        {
-        case Command::MOVETODIR:
-        {
-            bool success = moveToFolder(args, current_state.current_path);
-            break;
-        }
-        case Command::WHEREAMI:
-            std::cout << current_state.current_path << std::endl;
-            break;
-        case Command::HISTORY:
-            if (args == "-c")
-            {
-                current_state.history.clear();
-            }
-            else
-            {
-                printHistory(current_state.history);
-            }
-            break;
-        case Command::BYEBYE:
-            break;
-        default:
-            std::cout << "Command unknown" << std::endl;
-            break;
-        }
-
+        executeCommand(e, current_state);
         lastCommand = command;
     } while (lastCommand != Command::BYEBYE);
 
     dumpHistoryToFile("history.txt", current_state.history);
+}
+
+void executeCommand(HistoryEntry e, systemState &current_state)
+{
+    Command command = e.command;
+    std::string args = e.args;
+    // keep these in order, if possible
+    switch (command)
+    {
+    case Command::MOVETODIR:
+    {
+        bool success = moveToFolder(args, current_state.current_path);
+        break;
+    }
+    case Command::WHEREAMI:
+        std::cout << current_state.current_path << std::endl;
+        break;
+    case Command::HISTORY:
+        if (args == "-c")
+        {
+            current_state.history.clear();
+        }
+        else
+        {
+            printHistory(current_state.history);
+        }
+        break;
+    case Command::START:
+
+        break;
+    case Command::BYEBYE:
+        break;
+    default:
+        std::cout << "Command unknown" << std::endl;
+        break;
+    }
 }
