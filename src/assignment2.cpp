@@ -4,11 +4,13 @@
 #include "commands.hpp"
 #include "history.hpp"
 #include "foldertools.hpp"
+#include "programtools.hpp"
 
 struct systemState
 {
     std::filesystem::path current_path;
     std::vector<HistoryEntry> history;
+    std::vector<pid_t> runing_programs;
 };
 
 void executeCommand(HistoryEntry e, systemState &current_state);
@@ -68,9 +70,33 @@ void executeCommand(HistoryEntry e, systemState &current_state)
             printHistory(current_state.history);
         }
         break;
-    case Command::START:
+    case Command::REPLAY:
+    {
+        int idx = std::stoi(args);
+        HistoryEntry previous = current_state.history[current_state.history.size() - idx - 1];
 
+        executeCommand(previous, current_state);
         break;
+    }
+    case Command::START:
+        startProgramAndWait(args);
+        break;
+    case Command::BACKGROUND:
+    {
+        pid_t new_program = startProgram(args);
+        if(new_program != -1)
+        {
+            std::cout << "started with pid: " << std::to_string(new_program) << std::endl;
+            current_state.runing_programs.push_back(new_program);
+        }
+        break;
+    }
+    case Command::DALEK:
+    {
+        int pid = std::stoi(args);
+        killProcess(pid);
+        break;
+    }
     case Command::BYEBYE:
         break;
     default:
