@@ -25,7 +25,7 @@ HistoryEntry HistoryEntry::loadFromString(std::string s)
 {
     size_t first_space_pos = s.find(' ');
     int command_idx = std::stoi(s.substr(0, first_space_pos));
-    std::string args = s.substr(first_space_pos, s.length());
+    std::string args = s.substr(first_space_pos + 1, s.length());
     HistoryEntry e;
     e.args = args;
     e.command = (Command)command_idx;
@@ -41,6 +41,7 @@ void dumpHistoryToFile(std::string path, std::vector<HistoryEntry> entries)
         file << entry.toString() << std::endl;
     }
 }
+
 std::vector<HistoryEntry> getHistoryFromFile(std::string path)
 {
     std::ifstream file;
@@ -59,10 +60,11 @@ std::vector<HistoryEntry> getHistoryFromFile(std::string path)
     }
     return entries;
 }
+
 void printHistory(std::vector<HistoryEntry> entries)
 {
-    for (int i = 0; i < entries.size(); i++)
+    for (int i = entries.size() - 1; i >= 0; i--)
     {
-        std::cout << i << ": " << commandToString(entries[i].command) << entries[i].args << std::endl;
+        std::cout << entries.size() - i - 1 << ": " << commandToString(entries[i].command) << entries[i].args << std::endl;
     }
 }

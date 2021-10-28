@@ -32,6 +32,7 @@ Command getCommandFromPrompt(std::string &args)
     std::string cmd_str_lower = toLower(cmd_str.substr(0, arg_pos));
     return findCommand(cmd_str_lower);
 }
+
 Command findCommand(std::string s)
 {
     if (s == "movetodir")
@@ -79,6 +80,7 @@ Command findCommand(std::string s)
         return Command::NONE;
     }
 }
+
 std::string commandToString(Command command)
 {
     switch (command)

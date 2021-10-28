@@ -7,7 +7,9 @@ struct HistoryEntry
     std::string toString();
     static HistoryEntry loadFromString(std::string s);
 };
+
 void dumpHistoryToFile(std::string path, std::vector<HistoryEntry> entries);
+
 void printHistory(std::vector<HistoryEntry> entries);
 
 std::vector<HistoryEntry> getHistoryFromFile(std::string path);

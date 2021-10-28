@@ -1,6 +1,7 @@
 #include <filesystem>
 #include "foldertools.hpp"
 #include <iostream>
+
 bool moveToFolder(std::string folderName, std::filesystem::path &currentPath)
 {
     if (folderName == "..")
@@ -30,8 +31,5 @@ bool moveToFolder(std::string folderName, std::filesystem::path &currentPath)
         currentPath = newPath;
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
