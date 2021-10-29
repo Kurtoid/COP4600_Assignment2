@@ -135,6 +135,7 @@ void executeCommand(HistoryEntry e, systemState &current_state)
             pid_t pid = current_state.runing_programs[i];
             killProcess(pid);
         }
+        current_state.runing_programs.clear();
         break;
     }
     case Command::BYEBYE:
