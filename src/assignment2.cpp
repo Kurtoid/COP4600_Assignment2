@@ -97,6 +97,46 @@ void executeCommand(HistoryEntry e, systemState &current_state)
         killProcess(pid);
         break;
     }
+    case Command::REPEAT:
+    {
+        size_t numEnd = args.find(' ');
+        int numTimes = std::stoi(args.substr(0, numEnd));
+        // todo error check num times
+
+        // error check presence of program to repeat
+        if (numEnd == std::string::npos)
+        {
+            std::cout << "Provide a program to repeat." << std::endl;
+            break;
+        }
+
+        std::string command_string = args.substr(numEnd + 1, args.length());
+        std::vector<pid_t> spawned;
+
+        for (int i = 0; i < numTimes; i++)
+        {
+            pid_t pid = startProgram(command_string);
+            spawned.push_back(pid);
+        }
+
+        std::cout << "PIDs: ";
+        for (int i = 0; i < spawned.size() - 1; i++)
+        {
+            std::cout << std::to_string(spawned[i]) << ", ";
+        }
+        std::cout << std::to_string(spawned[spawned.size() - 1]) << std::endl;
+
+        break;
+    }
+    case Command::DALEKALL:
+    {
+        for (int i = 0; i < current_state.runing_programs.size(); i++)
+        {
+            pid_t pid = current_state.runing_programs[i];
+            killProcess(pid);
+        }
+        break;
+    }
     case Command::BYEBYE:
         break;
     default:
