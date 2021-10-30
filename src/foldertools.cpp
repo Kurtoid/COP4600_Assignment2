@@ -2,6 +2,7 @@
 #include "foldertools.hpp"
 #include <iostream>
 
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 
 bool moveToFolder(std::string folderName, std::filesystem::path &currentPath)
 {
     if (folderName == "..")
@@ -33,3 +34,4 @@ bool moveToFolder(std::string folderName, std::filesystem::path &currentPath)
     }
     return false;
 }
+// = = = = = = = = = = END Author: Kurt Wilson = = = = = = = = = = 

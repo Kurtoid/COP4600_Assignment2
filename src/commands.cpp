@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 
 std::string toLower(std::string data)
 {
     // TODO: this is passing by value, not reference, which could be slow on large inputs
@@ -110,3 +111,4 @@ std::string commandToString(Command command)
         return "NOSUCHCOMMAND";
     }
 }
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 

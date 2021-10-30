@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <vector>
 
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 
 char** split_args(std::vector<char *> &args_out, std::string s)
 {
     std::vector<std::string> args;
@@ -25,13 +26,17 @@ char** split_args(std::vector<char *> &args_out, std::string s)
 
     for(int i = 0; i < args.size(); i++)
     {
+        // = = = = = = = = = = Author: Joseph Terribile = = = = = = = = = =
         // ha ha ha ha const cast go brrrrrrrrrr
         args_out.push_back(const_cast<char*>(args[i].c_str()));
+        // = = = = = = = = = = END Author: Joseph Terribile = = = = = = = = = =
     }
     args_out.push_back(NULL);
     return &(args_out[0]);
 }
+// = = = = = = = = = = END Author: Kurt Wilson = = = = = = = = = = 
 
+// = = = = = = = = = = Author: Joseph Terribile = = = = = = = = = =
 pid_t startProgram(std::string command_string, std::filesystem::path &cwd)
 {
     size_t exeEnd = command_string.find(' ');
@@ -102,3 +107,4 @@ void killProcess(pid_t pid)
     int status;
     waitpid(pid, &status, 0);
 }
+// = = = = = = = = = = END Author: Joseph Terribile = = = = = = = = = =

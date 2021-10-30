@@ -8,6 +8,7 @@
 #include "foldertools.hpp"
 #include "programtools.hpp"
 
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 
 struct systemState
 {
     std::filesystem::path current_path;
@@ -46,12 +47,13 @@ int main()
 
     dumpHistoryToFile("history.txt", current_state.history);
 }
+// = = = = = = = = = = END Author: Kurt Wilson = = = = = = = = = = 
 
 void executeCommand(HistoryEntry &e, systemState &current_state)
 {
+    // = = = = = = = = = = Author: Joseph Terribile = = = = = = = = = = 
     Command command = e.command;
     std::string args = e.args;
-    // keep these in order, if possible
     switch (command)
     {
     case Command::MOVETODIR:
@@ -116,7 +118,6 @@ void executeCommand(HistoryEntry &e, systemState &current_state)
     {
         size_t numEnd = args.find(' ');
         int numTimes = std::stoi(args.substr(0, numEnd));
-        // todo error check num times
 
         // error check presence of program to repeat
         if (numEnd == std::string::npos)
@@ -174,13 +175,10 @@ void executeCommand(HistoryEntry &e, systemState &current_state)
         break;
     }
     case Command::BYEBYE:
-    // {
-    //     dumpHistoryToFile("history.txt", current_state.history);
-    //     exit(0);
-    // }
         break;
     default:
         std::cout << "Command unknown" << std::endl;
         break;
     }
+    // = = = = = = = = = = END Author: Joseph Terribile = = = = = = = = = =
 }

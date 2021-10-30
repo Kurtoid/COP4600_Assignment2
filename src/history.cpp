@@ -4,6 +4,7 @@
 #include <fstream>
 #include "history.hpp"
 
+// = = = = = = = = = = Author: Kurt Wilson = = = = = = = = = = 
 std::string HistoryEntry::toString()
 {
     std::string args_escaped;
@@ -55,12 +56,13 @@ std::vector<HistoryEntry> getHistoryFromFile(std::string path)
     while (getline(file, line))
     {
         HistoryEntry e = HistoryEntry::loadFromString(line);
-        // std::cout << (int)e.command << " " << e.args << std::endl;
         entries.push_back(e);
     }
     return entries;
 }
+// = = = = = = = = = = END Author: Kurt Wilson = = = = = = = = = = 
 
+// = = = = = = = = = = Author: Joseph Terribile = = = = = = = = = =
 void printHistory(std::vector<HistoryEntry> entries)
 {
     for (int i = entries.size() - 1; i >= 0; i--)
@@ -68,3 +70,4 @@ void printHistory(std::vector<HistoryEntry> entries)
         std::cout << entries.size() - i - 1 << ": " << commandToString(entries[i].command) << " " << entries[i].args << std::endl;
     }
 }
+// = = = = = = = = = = END Author: Joseph Terribile = = = = = = = = = =
