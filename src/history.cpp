@@ -65,6 +65,6 @@ void printHistory(std::vector<HistoryEntry> entries)
 {
     for (int i = entries.size() - 1; i >= 0; i--)
     {
-        std::cout << entries.size() - i - 1 << ": " << commandToString(entries[i].command) << entries[i].args << std::endl;
+        std::cout << entries.size() - i - 1 << ": " << commandToString(entries[i].command) << " " << entries[i].args << std::endl;
     }
 }
